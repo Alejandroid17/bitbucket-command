@@ -13,6 +13,8 @@
     "bitbucket": "2.11.0",
     "commander": "10.0.1",
     "inquirer": "9.2.2",
+    "just-extend": "6.2.0",
+    "just-merge": "3.2.0",
     "nunjucks": "3.2.4"
   },
   "devDependencies": {

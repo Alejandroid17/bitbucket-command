@@ -4,6 +4,8 @@ specifiers:
   bitbucket: 2.11.0
   commander: 10.0.1
   inquirer: 9.2.2
+  just-extend: 6.2.0
+  just-merge: 3.2.0
   nunjucks: 3.2.4
   standard: 17.0.0
 
@@ -11,6 +13,8 @@ dependencies:
   bitbucket: 2.11.0
   commander: 10.0.1
   inquirer: 9.2.2
+  just-extend: 6.2.0
+  just-merge: 3.2.0
   nunjucks: 3.2.4
 
 devDependencies:
@@ -1224,6 +1228,14 @@ packages:
       array-includes: 3.1.6
       object.assign: 4.1.4
     dev: true
+
+  /just-extend/6.2.0:
+    resolution: {integrity: sha512-cYofQu2Xpom82S6qD778jBDpwvvy39s1l/hrYij2u9AMdQcGRpaBu6kY4mVhuno5kJVi1DAz4aiphA2WI1/OAw==}
+    dev: false
+
+  /just-merge/3.2.0:
+    resolution: {integrity: sha512-cNh5FWt44hx4SpQS1xZU8Tzr/fQA69pqCdjbwxmaYYIOuRfA8EIg+dn1bGmIW03ZUtR2vkMOCjWKc+jIbpauSw==}
+    dev: false
 
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}

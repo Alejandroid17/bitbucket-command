@@ -2,7 +2,7 @@ import bitbucketPackage from 'bitbucket'
 import { Command } from 'commander'
 import inquirer from 'inquirer'
 import nunjucks from 'nunjucks'
-import { checkConfiguration, getConfiguration, listAllPullRequests, updateConfiguration } from './utils.js'
+import { UPDATE_OPTIONS, checkConfiguration, getConfiguration, listAllPullRequests, updateConfiguration } from './utils.js'
 
 const { Bitbucket } = bitbucketPackage
 
@@ -13,7 +13,9 @@ const program = new Command()
 program
   .name('Bitbucket commands')
 
-program.command('auth-config')
+const configCommand = program.command('config')
+
+configCommand.command('auth')
   .action(async () => {
     const questionList = [
       { type: 'input', name: 'username', message: 'Write the bitbucket username:' },
@@ -23,7 +25,43 @@ program.command('auth-config')
     ]
 
     inquirer.prompt(questionList).then((answers) => {
-      updateConfiguration({ auth: { ...answers } })
+      updateConfiguration({ auth: { ...answers } }, UPDATE_OPTIONS.MERGE)
+    })
+  })
+
+const configParticipants = configCommand.command('participants')
+
+configParticipants.command('list')
+  .action(async () => {
+    const configuration = await getConfiguration()
+    const { participants } = configuration
+
+    for (const [key, value] of Object.entries(participants)) {
+      console.log({ key, data: value })
+    }
+  })
+
+configParticipants.command('add')
+  .action(async () => {
+    const questionList = [
+      { type: 'input', name: 'bitbucketId', message: 'Write the bitbucket id ({user_uuid}):' },
+      { type: 'input', name: 'fullName', message: 'Write the full name:' },
+      { type: 'input', name: 'slackId', message: 'Write the slack id:' }
+    ]
+
+    inquirer.prompt(questionList).then((answers) => {
+      updateConfiguration({ [answers.bitbucketId]: { fullName: answers.fullName, slackId: answers.slackId } }, UPDATE_OPTIONS.ADD, 'participants')
+    })
+  })
+
+configParticipants.command('delete')
+  .action(async () => {
+    const questionList = [
+      { type: 'input', name: 'bitbucketId', message: 'Write the bitbucket id ({user_uuid}):' }
+    ]
+
+    inquirer.prompt(questionList).then((answers) => {
+      updateConfiguration(answers.bitbucketId, UPDATE_OPTIONS.DELETE, 'participants')
     })
   })
 

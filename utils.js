@@ -1,4 +1,6 @@
 import fs from 'fs'
+import extend from 'just-extend'
+import merge from 'just-merge'
 
 async function listAllPullRequests (bitbucketInstance, params) {
   let allData = {}
@@ -28,14 +30,34 @@ async function checkConfiguration () {
   }
 }
 
-async function updateConfiguration (data) {
+const UPDATE_OPTIONS = {
+  EXTEND: 'extend',
+  MERGE: 'merge',
+  ADD: 'add',
+  DELETE: 'delete'
+}
+
+async function updateConfiguration (data, updateOption, key = null) {
   const exists = fs.existsSync(DEFAULT_CONFIGURATION_PATH)
   if (!exists) fs.writeFileSync(DEFAULT_CONFIGURATION_PATH, JSON.stringify({}))
 
   const content = fs.readFileSync(DEFAULT_CONFIGURATION_PATH, 'utf8')
   let jsonContent = JSON.parse(content)
 
-  jsonContent = { ...jsonContent, ...data }
+  switch (updateOption) {
+    case UPDATE_OPTIONS.MERGE:
+      merge(jsonContent, data)
+      break
+    case UPDATE_OPTIONS.EXTEND:
+      extend(jsonContent, data)
+      break
+    case UPDATE_OPTIONS.ADD:
+      jsonContent = { ...jsonContent, [key]: { ...jsonContent[key], ...data } }
+      break
+    case UPDATE_OPTIONS.DELETE:
+      delete jsonContent[key][data]
+      break
+  }
 
   fs.writeFileSync(DEFAULT_CONFIGURATION_PATH, JSON.stringify(jsonContent, null, '  '))
 }
@@ -50,5 +72,6 @@ export {
   getConfiguration,
   checkConfiguration,
   updateConfiguration,
-  DEFAULT_CONFIGURATION_PATH
+  DEFAULT_CONFIGURATION_PATH,
+  UPDATE_OPTIONS
 }
