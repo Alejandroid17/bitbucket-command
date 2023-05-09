@@ -1,0 +1,27 @@
+{
+  "name": "bitbucket-command",
+  "version": "1.0.0",
+  "description": "Bitbucket commands",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejandroid17",
+  "license": "ISC",
+  "dependencies": {
+    "bitbucket": "2.11.0",
+    "commander": "10.0.1",
+    "inquirer": "9.2.2",
+    "nunjucks": "3.2.4"
+  },
+  "devDependencies": {
+    "standard": "17.0.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json",
+    "ignorePatterns": [
+      "dist/*"
+    ]
+  }
+}
