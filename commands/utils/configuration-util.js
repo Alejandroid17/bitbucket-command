@@ -2,25 +2,6 @@ import fs from 'fs'
 import extend from 'just-extend'
 import merge from 'just-merge'
 
-async function listAllPullRequests (bitbucketInstance, params) {
-  let allData = {}
-  let hasNextPage = true
-  let pageCount = 1
-
-  do {
-    const { data } = await bitbucketInstance.repositories.listPullRequests({ ...params, page: pageCount, fields: params.fields + ',next,size' })
-    const { values, size } = data
-
-    pageCount === 1
-      ? allData = { values, size }
-      : allData = { values: [...allData.values, ...values], size }
-
-    'next' in data ? pageCount++ : hasNextPage = false
-  } while (hasNextPage)
-
-  return { data: allData }
-}
-
 const DEFAULT_CONFIGURATION_PATH = './bitbucket-command-config.json'
 
 async function checkConfiguration () {
@@ -68,7 +49,6 @@ async function getConfiguration () {
 }
 
 export {
-  listAllPullRequests,
   getConfiguration,
   checkConfiguration,
   updateConfiguration,
