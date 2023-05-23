@@ -17,4 +17,15 @@ async function listAllPullRequests (bitbucketInstance, params) {
   return { data: allData }
 }
 
-export { listAllPullRequests }
+async function listAllIndividualPullRequests (bitbucketInstance, dataList, params) {
+  return await Promise.all(dataList.map(async (data, _) => {
+    const pullRequest = await bitbucketInstance.pullrequests.get({
+      ...params,
+      pull_request_id: data.id
+    })
+
+    return pullRequest.data
+  }))
+}
+
+export { listAllPullRequests, listAllIndividualPullRequests }
