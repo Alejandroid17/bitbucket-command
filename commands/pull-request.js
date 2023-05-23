@@ -3,7 +3,7 @@ import { checkConfiguration, getConfiguration } from './utils/configuration-util
 import bitbucketPackage from 'bitbucket'
 import nunjucks from 'nunjucks'
 import { listAllIndividualPullRequests, listAllPullRequests } from './utils/bitbucket-util.js'
-import { getParticipant, setAllParticipantsInformation } from './utils/participant-util.js'
+import { setAllParticipantsInformation } from './utils/participant-util.js'
 import { setApprovers, setBlockers } from './utils/pull-request-util.js'
 
 const { Bitbucket } = bitbucketPackage
