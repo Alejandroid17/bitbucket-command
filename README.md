@@ -8,8 +8,8 @@
 </div>
 
 <div align="center">
-
-[![License](https://img.shields.io/github/license/Alejandroid17/bitbucket-command?style=flat-square)](https://github.com/Alejandroid17/bitbucket-changelog/blob/main/LICENSE)
+    
+[![License](https://img.shields.io/github/license/Alejandroid17/bitbucket-command?style=flat-square)](https://github.com/Alejandroid17/bitbucket-command/blob/main/LICENSE)
 
 <br />
 </div>
