@@ -1,11 +1,12 @@
 import inquirer from 'inquirer'
 import { Command } from 'commander'
-import { UPDATE_OPTIONS, updateConfiguration } from './utils/configuration-util.js'
+import { UPDATE_OPTIONS, updateConfiguration, getConfiguration, checkConfiguration } from './utils/configuration-util.js'
 
 const authCommand = new Command('auth')
 
 const AUTH_COMMAND = {
-  LOGIN: 'login'
+  LOGIN: 'login',
+  SHOW: 'show'
 }
 
 authCommand.command(AUTH_COMMAND.LOGIN)
@@ -20,6 +21,14 @@ authCommand.command(AUTH_COMMAND.LOGIN)
     inquirer.prompt(questionList).then((answers) => {
       updateConfiguration({ auth: { ...answers } }, UPDATE_OPTIONS.MERGE)
     })
+  })
+
+authCommand.command(AUTH_COMMAND.SHOW)
+  .action(async () => {
+    checkConfiguration()
+
+    const configuration = await getConfiguration()
+    console.log(configuration.auth)
   })
 
 export default authCommand
