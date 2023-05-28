@@ -36,7 +36,8 @@
     <li><a href="#commands">Commands</a></li>
     <ul>
       <li><a href="#config">config</a></li>
-      <li><a href="#config">pull-request</a></li>
+      <li><a href="#auth">auth</a></li>
+      <li><a href="#pull-request">pull-request</a></li>
     </ul>
   </ul>
 </details>
@@ -63,11 +64,14 @@ Coming soon...
 
 #### `participant`
 
-- list
-- add
-- delete
+- `list`
+- `add`
+- `delete`
 
-#### `auth`
+### `auth`
+
+- `login`
+- `show`
 
 ### `pull-request`
 
