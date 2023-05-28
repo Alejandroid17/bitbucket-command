@@ -1,11 +1,11 @@
 import inquirer from 'inquirer'
 import { Command } from 'commander'
 
-import { UPDATE_OPTIONS, getConfiguration, updateConfiguration } from './utils/configuration-util.js'
+import { UPDATE_OPTIONS, getConfiguration, updateConfiguration } from '../utils/configuration-util.js'
 
-const participantCommand = new Command('participant')
+const participantConfigCommand = new Command('participant')
 
-participantCommand.command('list')
+participantConfigCommand.command('list')
   .action(async () => {
     const configuration = await getConfiguration()
     const { participants } = configuration
@@ -17,7 +17,7 @@ participantCommand.command('list')
     }
   })
 
-participantCommand.command('add')
+participantConfigCommand.command('add')
   .action(async () => {
     const questionList = [
       { type: 'input', name: 'bitbucketId', message: 'Write the bitbucket id ({user_uuid}):' },
@@ -30,7 +30,7 @@ participantCommand.command('add')
     })
   })
 
-participantCommand.command('delete')
+participantConfigCommand.command('delete')
   .action(async () => {
     const questionList = [
       { type: 'input', name: 'bitbucketId', message: 'Write the bitbucket id ({user_uuid}):' }
@@ -41,4 +41,4 @@ participantCommand.command('delete')
     })
   })
 
-export default participantCommand
+export default participantConfigCommand
