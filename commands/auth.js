@@ -4,7 +4,11 @@ import { UPDATE_OPTIONS, updateConfiguration } from './utils/configuration-util.
 
 const authCommand = new Command('auth')
 
-authCommand.command('login')
+const AUTH_COMMAND = {
+  LOGIN: 'login'
+}
+
+authCommand.command(AUTH_COMMAND.LOGIN)
   .action(async () => {
     const questionList = [
       { type: 'input', name: 'username', message: 'Write the bitbucket username:' },
@@ -19,3 +23,4 @@ authCommand.command('login')
   })
 
 export default authCommand
+export { AUTH_COMMAND }

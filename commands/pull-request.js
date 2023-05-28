@@ -12,6 +12,11 @@ nunjucks.configure({ autoescape: false })
 
 const pullRequestCommand = new Command('pull-request')
 
+const PULL_REQUEST_COMMAND = {
+  LIST_OPEN: 'list-open',
+  LIST_BLOCKED: 'list-blocked'
+}
+
 pullRequestCommand.command('list-open')
   .option('--format <type>', 'Output format (json, markdown)', 'json')
   .option('--pagelen <number>', 'Length of the response page', 20)
@@ -91,3 +96,4 @@ pullRequestCommand.command('list-blocked')
   })
 
 export default pullRequestCommand
+export { PULL_REQUEST_COMMAND }

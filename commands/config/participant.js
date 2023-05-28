@@ -5,7 +5,13 @@ import { UPDATE_OPTIONS, getConfiguration, updateConfiguration } from '../utils/
 
 const participantConfigCommand = new Command('participant')
 
-participantConfigCommand.command('list')
+const PARTICIPANT_CONFIG_COMMAND = {
+  LIST: 'list',
+  ADD: 'add',
+  DELETE: 'delete'
+}
+
+participantConfigCommand.command(PARTICIPANT_CONFIG_COMMAND.LIST)
   .action(async () => {
     const configuration = await getConfiguration()
     const { participants } = configuration
@@ -17,7 +23,7 @@ participantConfigCommand.command('list')
     }
   })
 
-participantConfigCommand.command('add')
+participantConfigCommand.command(PARTICIPANT_CONFIG_COMMAND.ADD)
   .action(async () => {
     const questionList = [
       { type: 'input', name: 'bitbucketId', message: 'Write the bitbucket id ({user_uuid}):' },
@@ -30,7 +36,7 @@ participantConfigCommand.command('add')
     })
   })
 
-participantConfigCommand.command('delete')
+participantConfigCommand.command(PARTICIPANT_CONFIG_COMMAND.DELETE)
   .action(async () => {
     const questionList = [
       { type: 'input', name: 'bitbucketId', message: 'Write the bitbucket id ({user_uuid}):' }
@@ -42,3 +48,4 @@ participantConfigCommand.command('delete')
   })
 
 export default participantConfigCommand
+export { PARTICIPANT_CONFIG_COMMAND }
